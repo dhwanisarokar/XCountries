@@ -4,6 +4,7 @@ import "./App.css";
 
 function App() {
   const [countries, setCountries] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   async function fetchAPIData() {
     try {
@@ -18,6 +19,7 @@ function App() {
     const fetchData = async () => {
       const data = await fetchAPIData();
       setCountries(data);
+      setLoading(false);
     };
 
     fetchData();
@@ -29,12 +31,16 @@ function App() {
         <h1>XCountries</h1>
       </div>
       <div className="container">
-        {countries?.map((item, idx) => (
-          <div key={idx} className="box">
-            <img src={item.flags.png} alt={`${item.name.common} flag`} />
-            <p>{item.name.common}</p>
-          </div>
-        ))}
+        {loading ? (
+          <h1>Loading..</h1>
+        ) : (
+          countries?.map((item, idx) => (
+            <div key={idx} className="box">
+              <img src={item.flags.png} alt={`${item.name.common} flag`} />
+              <p>{item.name.common}</p>
+            </div>
+          ))
+        )}
       </div>
     </>
   );
