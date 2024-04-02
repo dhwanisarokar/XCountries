@@ -53,7 +53,7 @@ function App() {
           <h1>Loading..</h1>
         ) : (
           filterCountries?.map((item, idx) => (
-            <div key={idx} className="box">
+            <div key={idx} className="countryCard">
               <img src={item.flags.png} alt={`${item.name.common} flag`} />
               <p>{item.name.common}</p>
             </div>
